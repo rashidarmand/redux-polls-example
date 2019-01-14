@@ -15,11 +15,6 @@ class Dashboard extends Component {
     const { showAnswered } = this.state
     const { answered, unanswered } = this.props
     const list = showAnswered ? answered : unanswered
-    const listItems = list.map(poll => (
-      <li key={ poll.id }>
-        { poll.question }
-      </li>
-    ))
     const unansweredBtn = {
       textDecoration: showAnswered === false ? 'underline' : null
     }
@@ -39,7 +34,11 @@ class Dashboard extends Component {
           </button>
         </div>
         <ul className="dashboard-list" >
-          { listItems }
+          {list.map(poll => (
+            <li key={ poll.id }>
+              { poll.question }
+            </li>
+          ))}
         </ul>
       </div>
     )
