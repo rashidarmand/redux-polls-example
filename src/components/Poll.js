@@ -5,6 +5,11 @@ import { getPercentage } from '../utils/helpers'
 const getVoteKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes']
 
 export class Poll extends Component {
+  handleAnswer = (answer) => {
+    const { poll, authedUser } = this.props
+    this.answered = true
+    console.log('add answer: ', answer)
+  }
   render() {
     const { poll, vote, authorAvatar } = this.props
     if(poll === null) {
@@ -24,7 +29,14 @@ export class Poll extends Component {
             const count = poll[key[0] + 'Votes'].length
 
             return (
-              <li className={`option ${vote === key[0] ? 'chosen' : ''}`}>
+              <li 
+                className={`option ${vote === key[0] ? 'chosen' : ''}`}
+                onClick={() => {
+                  if(vote === null && !this.answered) {
+                    this.handleAnswer(key[0])
+                  }
+                }}
+              >
                 {vote === null
                   ? poll[key]
                   : <div className='result'>
