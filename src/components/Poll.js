@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getPercentage } from '../utils/helpers'
+
+const getVoteKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes']
 
 export class Poll extends Component {
   render() {
@@ -7,6 +10,8 @@ export class Poll extends Component {
     if(poll === null) {
       return <p>This poll does not exist</p>
     }
+
+    const totalVotes = getVoteKeys().reduce((total, key) => total + poll[key].length, 0)
     
     return (
       <div className='poll-container'>
@@ -15,15 +20,20 @@ export class Poll extends Component {
           By <img src={ authorAvatar } alt="Author's Avatar"/>
         </div>
         <ul>
-          {['aText', 'bText', 'cText', 'dText'].map(key => (
-            <li className={`option ${vote === key[0] ? 'chosen' : ''}`}>
-              {vote === null
-                ? poll[key]
-                : <div>
-                    blah
-                  </div> }
-            </li>
-          ))}
+          {['aText', 'bText', 'cText', 'dText'].map(key => {
+            const count = poll[key[0] + 'Votes'].length
+
+            return (
+              <li className={`option ${vote === key[0] ? 'chosen' : ''}`}>
+                {vote === null
+                  ? poll[key]
+                  : <div className='result'>
+                      <span>{ poll[key] }</span>
+                      <span>{ getPercentage(count, totalVotes) }% ({ count })</span>
+                    </div> }
+              </li>
+            )
+          })}
         </ul>
       </div>
     )
@@ -40,7 +50,7 @@ const mapStateToProps = ({ authedUser, polls, users }, { match }) => {
     }
   }
 
-  const vote = ['aVotes', 'bVotes', 'cVotes', 'dVotes'].reduce((vote, key) => {
+  const vote = getVoteKeys().reduce((vote, key) => {
     if(vote !== null) {
       return vote[0]
     }
