@@ -5,18 +5,21 @@ import { handleAddAnswer } from '../actions/answers'
 
 const getVoteKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes']
 
-export class Poll extends Component {
+class Poll extends Component {
   handleAnswer = (answer) => {
     const { poll, authedUser } = this.props
     this.answered = true
+
     this.props.dispatch(handleAddAnswer({
       authedUser,
       answer,
       id: poll.id
     }))
   }
+
   render() {
     const { poll, vote, authorAvatar } = this.props
+    
     if(poll === null) {
       return <p>This poll does not exist</p>
     }
