@@ -36,10 +36,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => {
-  return {
-    loading: authedUser === null
-  }
-}
+const mapStateToProps = ({ authedUser }) => ({
+  loading: authedUser === null
+})
 
 export default connect(mapStateToProps)(App)
