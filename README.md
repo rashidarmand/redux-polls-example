@@ -2,4 +2,4 @@
 
 ## Sample polling app  example using React & Redux
 
-Click [here]() to visit site
+Click [here](http://redux-polls-example.surge.sh/) to visit site
