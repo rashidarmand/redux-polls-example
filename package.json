@@ -23,7 +23,7 @@
   },
   "git": {
     "scripts": { 
-      "pre-push": "surge --project ./build --domain example-githooks.surge.sh" 
+      "pre-push": "surge --project ./build --domain http://redux-polls-example.surge.sh/" 
     }
   } 
 }
