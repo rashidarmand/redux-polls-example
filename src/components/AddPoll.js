@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { handleAddPoll } from '../actions/polls'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleAddPoll } from '../actions/polls';
 
 class AddPoll extends Component {
   state = {

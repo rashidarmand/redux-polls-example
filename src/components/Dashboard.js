@@ -17,10 +17,12 @@ class Dashboard extends Component {
     const { answered, unanswered } = this.props
     const list = showAnswered ? answered : unanswered
     const unansweredBtn = {
-      textDecoration: showAnswered === false ? 'underline' : null
+      textDecoration: showAnswered === false ? 'underline' : null,
+      cursor: 'pointer'
     }
     const answeredBtn = {
-      textDecoration: showAnswered === true ? 'underline' : null
+      textDecoration: showAnswered === true ? 'underline' : null,
+      cursor: 'pointer'
     }
 
     return (
